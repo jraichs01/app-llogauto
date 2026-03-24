@@ -7,7 +7,7 @@ public class Automobil {
 
     Automobil(String mar, String mod, String mat){
         this.marca = mar;
-        this.mod = model;
+        this.model = mod;
         this.matricula = mat;
     }
     
