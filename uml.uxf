@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>30</y><w>210</w><h>190</h></coordinates><panel_attributes>Automobil
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>30</y><w>340</w><h>190</h></coordinates><panel_attributes>Automobil
 --
 +marca: String
 +model: String
@@ -7,4 +7,5 @@
 --
 +Automobil(in marca:String,in model:String,in matricula:String)
 +mostrarDades():String
+_+validarMatricula(in matricula:String):Boolean_
 </panel_attributes><additional_attributes></additional_attributes></element></diagram>
