@@ -1,34 +1,39 @@
 package com.llogaauto;
 
 public class GestorAutomobils {
+    // Atribut privat: un array d'objectes de tipus Automobil
     private Automobil[] llistaCotxes;
 
-    GestorAutomobils(int capacitat){
+    // Constructor: inicialitza l'array amb la capacitat especificada
+    public GestorAutomobils(int capacitat) {
         this.llistaCotxes = new Automobil[capacitat];
     }
 
-    public void afegirAutomobil(Automobil auto){
-        
-        if (this.llistaCotxes.length == Automobil.getComptador()){
-            System.out.println("El consessionari està ple");
+    /**
+     * Afegeix un automòbil en una posició específica de l'array.
+     * @param posicio L'índex de l'array (0 a capacitat-1)
+     * @param auto L'objecte Automobil a afegir
+     */
+    public void afegirAutomobil(int posicio, Automobil auto) {
+        if (posicio >= 0 && posicio < llistaCotxes.length) {
+            llistaCotxes[posicio] = auto;
         } else {
-            // afegir l'automobila a partir del últim
-            for(int i = 0; i < this.llistaCotxes.length; i++){
-                if(this.llistaCotxes[i] == null){
-                    this.llistaCotxes[i] = auto;
-                }
-            }
+            System.out.println("Error: Posició fora de rang.");
         }
     }
 
-    public void llistarAutomobils(){
-        for(int i = 0; i < this.llistaCotxes.length; i++){
-            if (this.llistaCotxes[i] != null) {
-                System.out.println(" marca :" + this.llistaCotxes[i].getMarca() +
-                                " model :" + this.llistaCotxes[i].getModel() +
-                                " matricula :" + this.llistaCotxes[i].getMatricula() );
+    /**
+     * Recorre l'array i mostra per pantalla els detalls dels automòbils existents.
+     */
+    public void llistarAutomobils() {
+        System.out.println("--- Llista d'Automòbils ---");
+        for (int i = 0; i < llistaCotxes.length; i++) {
+            if (llistaCotxes[i] != null) {
+                // Suposem que la classe Automobil té un mètode toString() definit
+                System.out.println("Posició " + i + ": " + llistaCotxes[i].toString());
+            } else {
+                System.out.println("Posició " + i + ": [Buit]");
             }
         }
     }
-
 }
