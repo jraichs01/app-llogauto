@@ -1,0 +1,33 @@
+classDiagram
+    class GestorAutomobils {
+        -Automobil[] llistaCotxes
+        +GestorAutomobils(capacitat: int)
+        +afegirAutomobil(auto: Automobil) void
+        +llistarAutomobils() void
+    }
+
+
+    %% modifiqueu la classe Automobil perquè coincideixi amb la classe Automobil definida anteriorment
+    class Automobil {
+        -String marca
+        -String model
+        -String matricula
+        -int comptador$
+        +Automobil(String marca, String model, String matricula)
+        +Automobil()
+        +setMarca(String marca)
+        +setModel(String model)
+        +setMatricula(String matricula)
+        +getMarca() String
+        +getModel() String
+        +getMatricula() string
+
+        +getComptador()$ int
+        %% setComptador --> per inicialitzar-lo
+        +setComptador(int valor)$
+        +validarMatricula(String matricula)$ boolean
+        +mostrarDades() String
+    }
+
+
+    GestorAutomobils "1" o-- "0..*" Automobil : conté
