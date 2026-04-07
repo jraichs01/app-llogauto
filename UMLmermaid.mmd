@@ -1,11 +1,23 @@
 classDiagram
     %% Definició de la Classe (El Plànol)
     class Automobil {
-        +String marca
-        +String model
-        +String matricula
-        +int comptador$
+        -String marca
+        -String model
+        -String matricula
+        -int comptador$
+        +Automobil(String marca, String model, String matricula)
         +Automobil()
+        +setMarca(String marca)
+        +setModel(String model)
+        +setMatricula(String matricula)
+        +getMarca() String
+        +getModel() String
+        +getMatricula() string
+
+        +getComptador()$ int
+        %% setComptador --> per inicialitzar-lo
+        +setComptador(int valor)$
+        +validarMatricula(String matricula)$ boolean
         +mostrarDades() String
     }
 
