@@ -36,4 +36,12 @@ public class GestorAutomobils {
             }
         }
     }
+
+    /**
+     * Retorna el nombre d'automobils de l'agencia
+     */
+    public int getNumCotxes(){
+        return llistaCotxes.length;
+    }
+
 }
