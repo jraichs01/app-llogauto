@@ -5,15 +5,17 @@ public abstract class Automobil {
     private String marca;
     private String model;
     private String matricula;
+    private TipusCombustible combustible;
    
     // Variable de classe
     private static int comptador = 0;
 
     // constructors
-    Automobil(String mar, String mod, String mat) {
+    Automobil(String mar, String mod, String mat, TipusCombustible combu) {
         this.marca = mar;
         this.model = mod;
         this.matricula = mat;
+        this.combustible = combu;
         Automobil.comptador ++;
     }
 
@@ -21,10 +23,11 @@ public abstract class Automobil {
         this.marca = "";
         this.model = "";
         this.matricula = "";
+        this.combustible = null;
         Automobil.comptador ++;
     }
 
-    // Getters i Setters
+    // *********** Getters i Setters ***********
 
     public String getMarca(){
         return this.marca;
@@ -46,11 +49,24 @@ public abstract class Automobil {
         this.model = model;
     }
 
+    public TipusCombustible getCombustible() {
+        return combustible;
+    }
+
+    public void setCombustible(TipusCombustible combustible) {
+        this.combustible = combustible;
+    }
+
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
-    // setter i getter del comptador.
+    //**** metodes ************************
+    public String mostrarDades() {
+        return " marca : " + this.marca + "   model: " + this.model + "  matricula:" + this.matricula;
+    }
+
+    // ***** Funcions de la classe ********
     public static int getComptador() {
         return comptador;
     }
@@ -58,13 +74,7 @@ public abstract class Automobil {
     public static void setComptador(int comptador) {
         Automobil.comptador = comptador;
     }
-
-    // metode de la classe
-    public String mostrarDades() {
-        return " marca : " + this.marca + "   model: " + this.model + "  matricula:" + this.matricula;
-    }
-
-    // funció de la classe
+   
     public static boolean validarMatricula(String matricula) {
 
         // Regex: 4 dígits + 3 lletres majúscules (excloent vocals segons l'estàndard i

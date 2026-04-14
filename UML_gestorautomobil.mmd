@@ -9,18 +9,23 @@ classDiagram
 
     %% modifiqueu la classe Automobil perquè coincideixi amb la classe Automobil definida anteriorment
     class Automobil {
+        <<abstract>>
         -String marca
         -String model
         -String matricula
+        -TipusCombustible combustible
         -int comptador$
-        +Automobil(String marca, String model, String matricula)
+        +Automobil(String marca, String model, String matricula, TipusCombustible combustible)
         +Automobil()
         +setMarca(String marca)
         +setModel(String model)
         +setMatricula(String matricula)
+        +setTipusCombustible(TipusCombustible combustible)
         +getMarca() String
         +getModel() String
         +getMatricula() string
+        +getTipusCombustible() TipusCombustible
+
 
         +getComptador()$ int
         %% setComptador --> per inicialitzar-lo
@@ -29,5 +34,17 @@ classDiagram
         +mostrarDades() String
     }
 
+    class TipusCombustible {
+        <<enumeration>>
+        BENZINA_95
+        BENZINA_98
+        DIESEL
+        ELECTRIC
+        HIBRID
+        -double preuPerUnitat
+        +TipusCombustible(double preu)
+        +getPreu() double
+    }
 
     GestorAutomobils "1" o-- "0..*" Automobil : conté
+    Automobil o-- TipusCombustible : usa
