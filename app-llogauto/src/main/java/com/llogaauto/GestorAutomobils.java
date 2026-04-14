@@ -30,9 +30,17 @@ public class GestorAutomobils {
         for (int i = 0; i < llistaCotxes.length; i++) {
             if (llistaCotxes[i] != null) {
                 // Suposem que la classe Automobil té un mètode toString() definit
-                System.out.println("Posició " + i + ": " + llistaCotxes[i].toString());
+                //System.out.println("Posició " + i + ": " + llistaCotxes[i].toString());
+
+                // Modificació de la funció per llistar automobils
+
+                System.out.println(" Marca :" + llistaCotxes[i].getMarca());
+                System.out.println(" Model :" + llistaCotxes[i].getModel());
+                System.out.println(" Matricula :" + llistaCotxes[i].getMatricula());
+             
+                
             } else {
-                System.out.println("Posició " + i + ": [Buit]");
+              //  System.out.println("Posició " + i + ": [Buit]");
             }
         }
     }

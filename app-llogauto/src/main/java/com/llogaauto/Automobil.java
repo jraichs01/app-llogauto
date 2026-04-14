@@ -1,6 +1,6 @@
 package com.llogaauto;
 
-public class Automobil {
+public abstract class Automobil {
     // Atributs
     private String marca;
     private String model;
