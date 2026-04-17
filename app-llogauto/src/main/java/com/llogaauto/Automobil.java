@@ -2,26 +2,61 @@ package com.llogaauto;
 
 public class Automobil {
     // Atributs
-    String marca;
-    String model;
-    String matricula;
-    
+    private String marca;
+    private String model;
+    private String matricula;
+   
     // Variable de classe
-    public static int comptador = 0;
+    private static int comptador = 0;
 
     // constructors
     Automobil(String mar, String mod, String mat) {
         this.marca = mar;
         this.model = mod;
         this.matricula = mat;
-        comptador ++;
+        Automobil.comptador ++;
     }
 
     Automobil(){
         this.marca = "";
         this.model = "";
         this.matricula = "";
-        comptador --;
+        Automobil.comptador ++;
+    }
+
+    // Getters i Setters
+
+    public String getMarca(){
+        return this.marca;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+    
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    // setter i getter del comptador.
+    public static int getComptador() {
+        return comptador;
+    }
+
+    public static void setComptador(int comptador) {
+        Automobil.comptador = comptador;
     }
 
     // metode de la classe
