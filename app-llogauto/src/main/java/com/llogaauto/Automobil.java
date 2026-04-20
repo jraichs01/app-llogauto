@@ -61,9 +61,10 @@ public abstract class Automobil {
         this.matricula = matricula;
     }
 
-    //**** metodes ************************
+    //**** Metodes ************************
     public String mostrarDades() {
-        return " marca : " + this.marca + "   model: " + this.model + "  matricula:" + this.matricula;
+        return " marca : " + this.marca + "   model: " + this.model 
+        + "  matricula: " + this.matricula + " Combustible: " + this.combustible;
     }
 
     // ***** Funcions de la classe ********

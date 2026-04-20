@@ -2,11 +2,11 @@ package com.llogaauto;
 
 public class GestorAutomobils {
     // Atribut privat: un array d'objectes de tipus Automobil
-    private Automobil[] llistaCotxes;
-
+    private Automobil[] llistaAutos;
+  
     // Constructor: inicialitza l'array amb la capacitat especificada
     public GestorAutomobils(int capacitat) {
-        this.llistaCotxes = new Automobil[capacitat];
+        this.llistaAutos = new Automobil[capacitat];
     }
 
     /**
@@ -15,8 +15,8 @@ public class GestorAutomobils {
      * @param auto L'objecte Automobil a afegir
      */
     public void afegirAutomobil(int posicio, Automobil auto) {
-        if (posicio >= 0 && posicio < llistaCotxes.length) {
-            llistaCotxes[posicio] = auto;
+        if (posicio >= 0 && posicio < llistaAutos.length) {
+            llistaAutos[posicio] = auto;
         } else {
             System.out.println("Error: Posició fora de rang.");
         }
@@ -27,29 +27,20 @@ public class GestorAutomobils {
      */
     public void llistarAutomobils() {
         System.out.println("--- Llista d'Automòbils ---");
-        for (int i = 0; i < llistaCotxes.length; i++) {
-            if (llistaCotxes[i] != null) {
-                // Suposem que la classe Automobil té un mètode toString() definit
-                //System.out.println("Posició " + i + ": " + llistaCotxes[i].toString());
-
-                // Modificació de la funció per llistar automobils
-
-                System.out.println(" Marca :" + llistaCotxes[i].getMarca());
-                System.out.println(" Model :" + llistaCotxes[i].getModel());
-                System.out.println(" Matricula :" + llistaCotxes[i].getMatricula());
-             
-                
-            } else {
-              //  System.out.println("Posició " + i + ": [Buit]");
-            }
+        for (int i = 0; i < llistaAutos.length; i++) {
+            if (llistaAutos[i] != null) {
+                System.out.println(llistaAutos[i].mostrarDades());
+            } 
         }
     }
 
     /**
      * Retorna el nombre d'automobils de l'agencia
      */
-    public int getNumCotxes(){
-        return llistaCotxes.length;
+    public int getNumAutos(){
+        return llistaAutos.length;
     }
+
+
 
 }
