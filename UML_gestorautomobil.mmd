@@ -1,13 +1,4 @@
 classDiagram
-    class GestorAutomobils {
-        -Automobil[] llistaCotxes
-        +GestorAutomobils(capacitat: int)
-        +afegirAutomobil(auto: Automobil) void
-        +llistarAutomobils() void
-    }
-
-
-    %% modifiqueu la classe Automobil perquè coincideixi amb la classe Automobil definida anteriorment
     class Automobil {
         <<abstract>>
         -String marca
@@ -15,22 +6,33 @@ classDiagram
         -String matricula
         -TipusCombustible combustible
         -int comptador$
-        +Automobil(String marca, String model, String matricula, TipusCombustible combustible)
+        +Automobil(mar, mod, mat, combu)
         +Automobil()
-        +setMarca(String marca)
-        +setModel(String model)
-        +setMatricula(String matricula)
-        +setTipusCombustible(TipusCombustible combustible)
         +getMarca() String
-        +getModel() String
-        +getMatricula() string
-        +getTipusCombustible() TipusCombustible
+        +setMarca(marca)
+        +getMatricula() String
+        +setMatricula(matricula)
+        +mostrarDades() String
+        +getComptador() int$
+        +validarMatricula(matricula) boolean$
+    }
 
+    class Cotxe {
+        -int numPortes
+        +Cotxe(marca, model, matricula, combustible, numPortes)
+        +Cotxe()
+        +getNumPortes() int
+        +setNumPortes(numPortes)
+        +mostrarDades() String
+    }
 
-        +getComptador()$ int
-        %% setComptador --> per inicialitzar-lo
-        +setComptador(int valor)$
-        +validarMatricula(String matricula)$ boolean
+    class Camio {
+        -float tara
+        -float pesMaxim
+        +Camio(marca, model, matricula, combustible, tara, pesMaxim)
+        +Camio()
+        +getTara() float
+        +getPesMaxim() float
         +mostrarDades() String
     }
 
@@ -42,9 +44,29 @@ classDiagram
         ELECTRIC
         HIBRID
         -double preuPerUnitat
-        +TipusCombustible(double preu)
         +getPreu() double
     }
 
-    GestorAutomobils "1" o-- "0..*" Automobil : conté
-    Automobil o-- TipusCombustible : usa
+    class GestorAutomobils {
+        -Automobil[] llistaAutos
+        +GestorAutomobils(capacitat)
+        +afegirAutomobil(posicio, auto)
+        +llistarAutomobils()
+        +getNumAutos() int
+    }
+
+    class Main {
+        +main(args)$
+        +menu(agencia)$
+        -crearCotxe(sc) Cotxe$
+        -crearCamio(sc) Camio$
+        -seleccionarCombustible(sc) TipusCombustible$
+    }
+
+    Automobil <|-- Cotxe : Herència
+    Automobil <|-- Camio : Herència
+    Automobil o-- TipusCombustible : Associació
+    GestorAutomobils "1" *-- "0..*" Automobil : Composició (Array)
+    Main ..> GestorAutomobils : Utilitza
+    Main ..> Cotxe : Crea
+    Main ..> Camio : Crea
