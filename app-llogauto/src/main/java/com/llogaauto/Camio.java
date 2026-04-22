@@ -4,21 +4,20 @@ public class Camio extends Automobil{
     private float tara;
     private float pesMaxim;
 
-     // Constructor
-    Camio(String marca, String model, String matricula, TipusCombustible combustible,float tara,float pesMaxim){
-        // Cridem el constructor de la classe pare
-        super(marca,model,matricula,combustible);
+     // Constructor per defecte i constructor amb paràmetres
+    public Camio(String marca, String model, String matricula, TipusCombustible combustible,float tara,float pesMaxim){
+        super(marca,model,matricula,combustible); //crida al constructor de la classe pare
         this.tara = tara;
         this.pesMaxim = pesMaxim;
     }
 
-    Camio(){
+    public Camio(){
         super("","","",null);
         this.tara = 0;
         this.pesMaxim = 0;
     }
 
-    // *** Setters i Getters
+    // Getters i Setters   
     public float getTara() {
         return tara;
     }
@@ -35,7 +34,7 @@ public class Camio extends Automobil{
         this.pesMaxim = pesMaxim;
     }
 
-    // Sobrecarreguem mostrarDades
+    // Sobrecarreguem mostrarDades de la classe pare
     @Override
     public String mostrarDades(){
         return super.mostrarDades() + " Tara : " + this.tara + " Pes Màxim : " + this.pesMaxim;

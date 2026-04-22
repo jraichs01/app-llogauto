@@ -4,13 +4,13 @@ public class Cotxe extends Automobil {
     private int numPortes;
 
     // Constructor
-    Cotxe(String marca, String model, String matricula, TipusCombustible combustible,int numeroPortes){
+    public Cotxe(String marca, String model, String matricula, TipusCombustible combustible,int numeroPortes){
         // Cridem el constructor de la classe pare
         super(marca,model,matricula,combustible);
         this.numPortes = numeroPortes;
     }
 
-    Cotxe(){
+    public Cotxe(){
         super("","","",null);
         this.numPortes = 0;
     }

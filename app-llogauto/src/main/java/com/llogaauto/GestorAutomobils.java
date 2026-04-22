@@ -1,46 +1,65 @@
 package com.llogaauto;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class GestorAutomobils {
-    // Atribut privat: un array d'objectes de tipus Automobil
-    private Automobil[] llistaAutos;
-  
-    // Constructor: inicialitza l'array amb la capacitat especificada
-    public GestorAutomobils(int capacitat) {
-        this.llistaAutos = new Automobil[capacitat];
+
+    // Atributs privats
+    private ArrayList<Automobil> llistaAutomobils;
+
+   // Constructor per defecte
+    public GestorAutomobils() {
+        this.llistaAutomobils = new ArrayList<>();
     }
 
-    /**
-     * Afegeix un automòbil en una posició específica de l'array.
-     * @param posicio L'índex de l'array (0 a capacitat-1)
-     * @param auto L'objecte Automobil a afegir
-     */
-    public void afegirAutomobil(int posicio, Automobil auto) {
-        if (posicio >= 0 && posicio < llistaAutos.length) {
-            llistaAutos[posicio] = auto;
+    // Metode per afegir un automobil a la llista
+    public void afegirAutomobil(Automobil auto) {
+        if(auto != null && !existeixAutomobil(auto.getMatricula())){
+            llistaAutomobils.add(auto);
         } else {
-            System.out.println("Error: Posició fora de rang.");
+            System.out.println("No s'ha pogut afegir l'automòbil. Matricula ja existeix o és null.");
         }
     }
 
-    /**
-     * Recorre l'array i mostra per pantalla els detalls dels automòbils existents.
-     */
+    // Metode per eliminar un automobil per matricula. Utilitzan un iterador
+    public void eliminarAutomobil(String matricula) {
+        Iterator<Automobil> it = llistaAutomobils.iterator();
+        boolean eliminat = false;
+
+        while (it.hasNext() && !eliminat) {
+            Automobil auto = it.next();
+            if (auto.getMatricula().equals(matricula)) {
+                it.remove();
+                eliminat = true;
+            }
+        }
+        if (!eliminat) {
+            System.out.println("No s'ha trobat l'automòbil amb matrícula: " + matricula);
+        }   
+    }
+
+    // Metode per llistar tots els automobils   
     public void llistarAutomobils() {
-        System.out.println("--- Llista d'Automòbils ---");
-        for (int i = 0; i < llistaAutos.length; i++) {
-            if (llistaAutos[i] != null) {
-                System.out.println(llistaAutos[i].mostrarDades());
-            } 
+        if (llistaAutomobils.isEmpty()) {
+            System.out.println("No hi ha automòbils a la llista.");
+        } else {
+            for (Automobil auto : llistaAutomobils) {
+                System.out.println(auto.mostrarDades());
+            }
+        }       
+    }
+
+    //  Metode per comprovar si existeix un automobil a la llista per matricula. Utilitzan un iterador
+    public boolean existeixAutomobil(String matricula) {
+        Iterator<Automobil> it = llistaAutomobils.iterator();
+        while (it.hasNext()) {
+            Automobil auto = it.next();
+            if (auto.getMatricula().equals(matricula)) {
+                return true;
+            }
         }
+        return false;
     }
-
-    /**
-     * Retorna el nombre d'automobils de l'agencia
-     */
-    public int getNumAutos(){
-        return llistaAutos.length;
-    }
-
-
 
 }

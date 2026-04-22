@@ -4,67 +4,92 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        // Creem l'agencia de lloguer
-        GestorAutomobils agencia = new GestorAutomobils(10);
-        menu(agencia);
-    }
-
-    // MENU
-    public static void menu(GestorAutomobils agencia) {
-
-        Scanner sc = new Scanner(System.in);
-
-        // 1. Definim una mida màxima i l'array
-        int comptador = 0; // Ens indica quants vehicles hi ha i la següent posició lliure
-
-        boolean sortir = false;
-
-        while (!sortir) {
-            System.out.println("\n--- GESTIÓ DE FLOTA (ARRAY FIXE) ---");
-            System.out.println("1. Afegir Cotxe");
-            System.out.println("2. Afegit Camió:");
-            System.out.println("3. Llistar Vehicles");
-            System.out.println("4. Sortir");
-            System.out.print("Tria una opció: ");
-
-            int opcio = sc.nextInt();
-            sc.nextLine();
-
-            // Verifiquem si l'array està ple abans d'afegir-ne un de nou
-            if ((opcio == 1 || opcio == 2) && comptador >= agencia.getNumAutos()) {
-                System.out.println("❌ Error: La flota està plena (màxim 10).");
-                continue; // Torna a l'inici del bucle
-            }
-
-            switch (opcio) {
-                case 1:
-                    // Afegim un cotxe
-                    agencia.afegirAutomobil(Automobil.getComptador(),crearCotxe(sc));
-                    break;
-                case 2:
-                    // Afegim un camió
-                    agencia.afegirAutomobil(Automobil.getComptador(),crearCamio(sc));
-                    break;
-                case 3:
-                    // Llistar autos
-                    agencia.llistarAutomobils();
-                    break;
-
-                case 4:
-                    sortir = true;
-                    break;
-
-                default:
-                    System.out.println("Opció no vàlida.");
-            }
+        try (Scanner sc = new Scanner(System.in)) {
+            GestorAutomobils agencia = new GestorAutomobils();
+            menu(agencia, sc);
+        } catch(Exception e) {
+            System.out.println("S'ha produït un error: " + e.getMessage() + ". El programa es tancarà.");
         }
 
-        sc.close(); // tanquem Scanner
         System.out.println("Programa finalitzat.");
     }
 
-    private static Cotxe crearCotxe(Scanner sc){
+    public static void menu(GestorAutomobils agencia, Scanner sc) {
+        boolean sortir = false;
+
+        while (!sortir) {
+            System.out.println("\n--- GESTIÓ DE FLOTA ---");
+            System.out.println("1. Afegir Cotxe");
+            System.out.println("2. Afegir Camion");
+            System.out.println("3. Eliminar Automòbil");
+            System.out.println("4. Llistar Vehicles");
+            System.out.println("5. Sortir");
+            System.out.print("Tria una opció: ");
+
+            if (sc.hasNextInt()) {
+                int opcio = sc.nextInt();
+                sc.nextLine();
+
+                switch (opcio) {
+                    case 1:
+                        Cotxe cotxe = crearCotxe(sc);
+                        if (cotxe != null) {
+                            if (!agencia.existeixAutomobil(cotxe.getMatricula())) {
+                                agencia.afegirAutomobil(cotxe);
+                                System.out.println("Cotxe afegit correctament.");
+                            } else {
+                                System.out.println("El cotxe ja existeix!");
+                            }
+                        }
+                        break;
+
+                    case 2:
+                        Camio camio = crearCamio(sc);
+                        if (camio != null) {
+                            if (!agencia.existeixAutomobil(camio.getMatricula())) {
+                                agencia.afegirAutomobil(camio);
+                                System.out.println("Camió afegit correctament.");
+                            } else {
+                                System.out.println("El camió ja existeix!");
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        System.out.print("Matrícula a eliminar: ");
+                        String matricula = sc.nextLine().trim();
+                        if (matricula.isEmpty()) {
+                            System.out.println("Matrícula no vàlida.");
+                        } else {
+                            if (agencia.existeixAutomobil(matricula)) {
+                                agencia.eliminarAutomobil(matricula);
+                                System.out.println("Automòbil eliminat.");
+                            } else {
+                                System.out.println("Automòbil no trobat.");
+                            }
+                            agencia.llistarAutomobils(); // mostrar llista actualitzada després de l'eliminació
+                        }
+                        break;
+
+                    case 4:
+                        agencia.llistarAutomobils();
+                        break;
+
+                    case 5:
+                        sortir = true;
+                        break;
+
+                    default:
+                        System.out.println("Opció no vàlida (1-5).");
+                }
+            } else {
+                sc.nextLine(); // clear invalid input
+                System.out.println("Opció invàlida. Introdueix un número (1-5).");
+            }
+        }
+    }
+
+     private static Cotxe crearCotxe(Scanner sc){
         String matricula = "";
 
         System.out.print("Marca: ");
@@ -106,7 +131,7 @@ public class Main {
             } else{
                 break;
             }
-        } 
+        }
    
         System.out.print("Tara: ");
         Float tara = Float.parseFloat(sc.nextLine());
