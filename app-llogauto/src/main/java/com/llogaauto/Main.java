@@ -106,7 +106,7 @@ public class Main {
             } else{
                 break;
             }
-        }
+        } 
    
         System.out.print("Tara: ");
         Float tara = Float.parseFloat(sc.nextLine());
